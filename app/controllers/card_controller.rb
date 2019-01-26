@@ -31,18 +31,18 @@ class CardController < ApplicationController
   
   def list
     # prepare data (migrate to BJ -> separate into sub func)
+    @config = {}
     -> {
-      @_config = {}
       create_config = ->(key, &block){
         k = String(key).to_sym
-        (@_config[k] = {
+        (@config[k] = {
           fields: {},
         }).instance_exec(&block)
-        @_config[k]
+        @config[k]
       }
       create_field  = ->(cfg, key, name, group, classes, function){
         f = cfg[:fields]
-        k = String(key).to_sym
+        k = String(key).dasherize.to_sym
         f[k] = {
           name: name,
           group: group,
@@ -54,10 +54,10 @@ class CardController < ApplicationController
         [k[0,2].capitalize,k]
       end.to_h
       create_config.call :produce do
-        create_field.call(self, :name, 'Title', 'general', [], :title)
+        create_field.call(self, :name, 'Title', 'general', [], :title_tr)
       end
       create_config.call :support do
-        create_field.call(self, :name, 'Title', 'general', [], :title)
+        create_field.call(self, :name, 'Title', 'general', [], :title_tr)
         attr.each do |k,m|
           create_field.call(self, "stat_#{m}", k, 'general', [], "max_%s_bonus" % [m] )
         end
@@ -67,7 +67,7 @@ class CardController < ApplicationController
         })
         create_field.call(self, :stat_ratio_g, "Ratio (G)", 'general', [], ->(c){
           score, grade = c.max_ratio_stat, c.max_ratio_grade
-          ("%d <span>%s</span>"%[score,grade]).html_safe
+          ("%.3f <span>%s</span>"%[score,grade]).html_safe
         })
         # Panels
         create_field.call(self, :panel_style, "Panel Style", 'panels', [], ->(c){'Normal Panel'})
@@ -81,6 +81,6 @@ class CardController < ApplicationController
     }.call
     
     # main func
-    @card_list = MstShinyColors::BaseCard.all
+    @card_list = MstShinyColors::BaseCard.all.sort_by(&:id).group_by(&:type)
   end
 end

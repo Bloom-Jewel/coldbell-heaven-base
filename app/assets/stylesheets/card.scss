@@ -178,3 +178,15 @@
   }
 }
 
+.card-section {
+  .card-list {
+    .card-icon {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: 50%;
+    }
+    [data-sort-key^=stat-] {
+      text-align: right;
+    }
+  }
+}

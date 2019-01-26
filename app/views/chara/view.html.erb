@@ -60,7 +60,7 @@
       <% else %>
       <a href="<%= card_path(card.id) %>">
         <div class="entry bg" style="background-image:url('<%= shinymasu_card_image_path('icon',card.id) %>')"></div>
-        <div class="entry"><%= card.title %></div>
+        <div class="entry"><%= card.title_tr %></div>
       </a>
       <% end %>
       </div>
@@ -85,7 +85,7 @@
       <% else %>
       <a href="<%= card_path(card.id) %>">
         <div class="entry bg" style="background-image:url('<%= shinymasu_card_image_path('icon',card.id) %>')"></div>
-        <div class="entry"><%= card.title %></div>
+        <div class="entry"><%= card.title_tr %></div>
       </a>
       <% end %>
     </div>
@@ -96,6 +96,7 @@
   </div>
   <% end %>
 </div>
+<br>
 <span class="text-muted">*Don't take this seriously.</span><br>
 <span class="text-danger">**Please note that some cards may be unregistered. You can offer a help for it.</span><br>
 

@@ -1,7 +1,7 @@
 <h1>Card List</h1>
   <% @card_list.each do |key, cards| %>
   <% next if cards.blank? %>
-  <% config = @_config[key] %>
+  <% config = @config[key] %>
   <% next if config.blank? %>
   <div id="<%= 'card-type-%s' % [key] %>" class="card-section">
     <h2><%= "%s Card List" % [key.to_s.titleize] %></h2>
@@ -11,10 +11,10 @@
     </div>
     <table class="card-list">
     <thead>
-      <tr>
+      <tr >
         <th></th>
         <% config[:fields].each do |key, header| %>
-        <th class="<%=(['card-info-' + key] + header[:class]).join(' ')%>"
+        <th class="<%=(['card-info-%s' % key] + header[:class]).join(' ')%>"
           data-sort-key="<%=key%>"
           data-sort-group="<%=header[:group]%>"
         ><%= header[:name] %></th>
@@ -23,15 +23,21 @@
     </thead>
     <tbody>
     <% cards.each do |card| %>
-      <% card_classes = '' %>
+      <% card_classes = [] %>
       <% card_classes << 'incomplete' if card.incomplete? %>
       <tr class="<%= card_classes.join(' ') %>">
         <td class="card-icon" style="background-image:url('<%= shinymasu_card_image_path('icon',card.id) %>')" width=32></td>
         <% config[:fields].each do |key, header| %>
-        <td class="<%=(['card-info-' + key] + header[:class]).join(' ')%>"
+        <td class="<%=(['card-info-%s' % key] + header[:class]).join(' ')%>"
           data-sort-key="<%=key%>"
           data-sort-group="<%=header[:group]%>"
-        ><%= header[:function].execute(card)%></td>
+        ><%=
+          v = header[:function].execute(card)
+          case key
+          when :name; link_to(v, card_path(card.id))
+          else; v
+          end
+        %></td>
         <% end %>
       </tr>
     <% end %>
