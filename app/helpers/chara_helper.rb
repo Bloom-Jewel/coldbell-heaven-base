@@ -1,0 +1,2 @@
+module CharaHelper
+end

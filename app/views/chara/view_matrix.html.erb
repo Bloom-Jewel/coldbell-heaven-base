@@ -1,0 +1,25 @@
+<div id="chara-view-matrix" class="association">
+  <h1>Character Matrix</h1>
+  <div class="row">
+    <div class="entry"></div>
+    <% %w(sun moon star).each do |attr| %>
+      <div class="entry bg type-<%= attr %>"></div>
+    <% end %>
+  </div>
+  <% @_chara_table.each do |unit_id, unit_table| %>
+  <div class="row">
+    <div class="entry bg unit-<%= "%02d" % unit_id %>"></div>
+    <% unit_table.each do |attr, attr_table| %>
+      <div class="entry">
+      <% attr_table.each_slice(2) do |chara_row| %>
+        <div class="row">
+        <% chara_row.each do |chara| %>
+          <a title="<%= chara.name_romaji %>" href="<%= chara_path(chara.id) %>" class="entry bg chibi<%= "%02d" % chara.id %>"></a>
+        <% end %>
+        </div>
+      <% end %>
+      </div>
+    <% end %>
+  </div>
+  <% end %>
+</div>

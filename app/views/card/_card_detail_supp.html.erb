@@ -1,0 +1,66 @@
+<% current_support_skills = {} %>
+<%
+  nc = proc {|c|!%w(a i u e o).any?{|_c|c == _c}}
+  cnt = 2
+  spl = proc { |sk|
+    if sk.count('_').zero? then
+      next spl.call(sk.each_char.each_slice(3).map{|x|x.join('')}.join('_'))
+    end
+    sk.split('_').first(2).map{|skp|
+      chk = skp[1..-1].each_char.chunk(&nc).to_a
+      counts = {}
+      chk.each do |(char_const, char_data)|
+        (counts[char_const] ||= []).concat char_data
+      end
+      if skp.size == 1 then
+        skp
+      elsif counts[true].size >= cnt then #>
+        skp[0] + counts[true][0,cnt].join('')
+      else
+        skp[0,cnt + 1]
+      end.capitalize
+    }.join('')
+  }
+  cst = @card.support_skill_tiers
+%>
+<% cst.each do |tier, support_skills| %>
+<% ns = {} %>
+<span style="font-size:1.5em;">Level <%= tier %></span>
+<div class="row">
+  <div class="entry">
+  <% support_skills.each do |support_skill| %>
+  <%
+    ef = support_skill.effect
+    sk, sl, sa = ef.effect_type, ef.support_skill_level, ef.attr
+    skt = "%s %s" % [spl.call(sk), sa]
+    nr = !current_support_skills.key?(skt)
+    nr ||= sl > current_support_skills[skt]&.support_skill_level.to_i
+    if nr then
+      current_support_skills.store(skt,support_skill)
+      ns.store(skt,support_skill)
+    end
+  %>
+    <span><%= support_skill.effect.human_description %></span><br>
+  <% end %>
+  </div>
+  <div class="entry">
+  <% current_support_skills.each do |k,v| %>
+    <% kp, ka = k.split(/\s+/) %>
+    <% s = ("<span>%02d</span>"%[v.support_skill_level]).html_safe %>
+    <% i = ['support-skill-icon', kp.underscore] %>
+    <% i.push('support-skill-learn') if ns.key?(k) %>
+    <%
+      case v.support_skill_level
+      when 10..99; i.push('tier2')
+      else; ->{}
+      end
+    %>
+    <div class="<%= i.join(' ') %>" data-caption="<%= kp.titleize.split.join($/).upcase %>"><br>Lv <%= s %></div>
+  <% end %>
+  </div>
+</div>
+<% if cst.max_by(&:first).first > tier then %>
+<hr>
+<% end %>
+<% end %>
+
