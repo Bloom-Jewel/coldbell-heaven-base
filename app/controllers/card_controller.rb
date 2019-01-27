@@ -62,12 +62,12 @@ class CardController < ApplicationController
           create_field.call(self, "stat_#{m}", k, 'general', [], "max_%s_bonus" % [m] )
         end
         create_field.call(self, :stat_overall_g, "Overall (G)", 'general', [], ->(c){
-          score, grade = c.max_overall_stat, c.max_overall_grade
-          ("%d <span>%s</span>"%[score,grade]).html_safe
+          score, grade = "%d" % c.max_overall_stat, c.max_overall_grade
+          [score, grade]
         })
         create_field.call(self, :stat_ratio_g, "Ratio (G)", 'general', [], ->(c){
-          score, grade = c.max_ratio_stat, c.max_ratio_grade
-          ("%.3f <span>%s</span>"%[score,grade]).html_safe
+          score, grade = "%.3f" % c.max_ratio_stat, c.max_ratio_grade
+          [score, grade]
         })
         # Panels
         create_field.call(self, :panel_style, "Panel Style", 'panels', [], ->(c){'Normal Panel'})

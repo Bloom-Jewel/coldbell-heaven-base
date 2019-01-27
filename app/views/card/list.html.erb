@@ -33,8 +33,10 @@
           data-sort-group="<%=header[:group]%>"
         ><%=
           v = header[:function].execute(card)
-          case key
+          sk = String(key).underscore.to_sym
+          case sk
           when :name; link_to(v, card_path(card.id))
+          when :stat_overall_g, :stat_ratio_g; "<span data-type=value>%1$s</span> <span class="grade grade_%2$s">%2$s</span>".html_safe % v
           else; v
           end
         %></td>
