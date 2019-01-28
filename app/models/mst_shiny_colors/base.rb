@@ -1,6 +1,6 @@
 module MstShinyColors
-  class Base < ApplicationRecord
-    self.logger.level = 1 
+  class Base < ColdbellHeaven::ApplicationRecord
+    self.logger&.level = 1 
     self.establish_connection :'master_shinydb'
     self.connection.disable_query_cache!
     self.abstract_class = true

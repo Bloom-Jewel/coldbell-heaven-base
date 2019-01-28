@@ -1,0 +1,114 @@
+/*
+ *= require_self
+ */
+
+body {
+  position: relative;
+  //width: 100%;
+  //max-width: 960px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.bg {
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+.cbhrow {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  &.fit {
+    &:first-child:nth-last-child(1) {
+      height: 100%;
+    }
+    &:first-child:nth-last-child(2),
+    &:first-child:nth-last-child(2) ~ & {
+      height: 50%;
+    }
+    &:first-child:nth-last-child(3),
+    &:first-child:nth-last-child(3) ~ & {
+      height: 33.33333333%;
+    }
+    &:first-child:nth-last-child(4),
+    &:first-child:nth-last-child(4) ~ & {
+      height: 25%;
+    }
+  }
+}
+.entry {
+  display: inline-block;
+  padding: 0;
+  &:not(.fit) {
+    margin-right: 2%;
+    &:first-child {
+      &:nth-last-child(1) {
+        width: 98%;
+      }
+      &:nth-last-child(2),
+      &:nth-last-child(2) ~ .entry {
+        width: 48%;
+      }
+      &:nth-last-child(3),
+      &:nth-last-child(3) ~ .entry {
+        width: 31.33333333%;
+      }
+      &:nth-last-child(4),
+      &:nth-last-child(4) ~ .entry {
+        width: 23%;
+      }
+      &:nth-last-child(5),
+      &:nth-last-child(5) ~ .entry {
+        width: 18%;
+      }
+      &:nth-last-child(6),
+      &:nth-last-child(6) ~ .entry {
+        width: 14.66666667%;
+      }
+    }
+  }
+  &:first-child {
+    &:nth-last-child(1) {
+      width: 100%;
+    }
+    &:nth-last-child(2),
+    &:nth-last-child(2) ~ .entry {
+      width: 50%;
+    }
+    &:nth-last-child(3),
+    &:nth-last-child(3) ~ .entry {
+      width: 33.33333333%;
+    }
+    &:nth-last-child(4),
+    &:nth-last-child(4) ~ .entry {
+      width: 25%;
+    }
+    &:nth-last-child(5),
+    &:nth-last-child(5) ~ .entry {
+      width: 16%;
+    }
+    &:nth-last-child(6),
+    &:nth-last-child(6) ~ .entry {
+      width: 16.66666667%;
+    }
+  }
+  &[data-field] {
+    border-bottom: #a2a8a3 dotted 1.5pt;
+    &:before {
+      content: attr(data-field);
+      display: inline-block;
+      width: 40%;
+      max-width: 82px;
+      text-align: center;
+      color: #f4f1f2;
+      background: #a2a8a3;
+      word-wrap: normal;
+      margin-right: 10px;
+      border: 0px;
+      border-radius: 10px;
+    }
+  }
+}

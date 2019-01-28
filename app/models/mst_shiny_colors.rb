@@ -1,6 +1,9 @@
-module MstShinyColors
+module Object::MstShinyColors
   GAME_TEASE_DATE = Time.new(2018,2,7,15,0,0,32400).freeze
 end
+
+Object.const_set :MstShinyColors, ColdbellHeaven::MstShinyColors unless defined?(Object::MstShinyColors)
+Object.const_set :ShinyColors, ::MstShinyColors unless defined?(Object::ShinyColors)
 
 loop do
   # Scan all class names
@@ -21,8 +24,7 @@ loop do
       end
     end
   when 2
-    Dir.glob(File.join(__dir__,File.basename(__FILE__,File.extname(__FILE__)),"**/*.rb")).each(&Kernel.method(:require_or_load))
+    Dir.glob(File.join(__dir__,File.basename(__FILE__,File.extname(__FILE__)),"**/*.rb")).sort.each(&Kernel.method(:require_or_load))
   end
   break
 end
-Object.const_set :ShinyColors, MstShinyColors unless defined?(ShinyColors)

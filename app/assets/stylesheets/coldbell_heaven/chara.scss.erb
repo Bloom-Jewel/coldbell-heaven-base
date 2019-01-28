@@ -1,0 +1,60 @@
+// SC-CHARA
+
+#chara-data-card {
+  & > div {
+    position: relative;
+    height: 256px;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+#chara-portrait {
+  width: 20%;
+  <% MstShinyColors::Chara.pluck(:id).each do |ch_id| %>
+  &.portrait<%= '%02d' % ch_id %> {
+    background-image: url('<%= '/img/coldbell/chara/%02d_portrait_mizugi2018.png' % [ch_id] %>');
+  }
+  <% end %>
+}
+#chara-data {width: 60%;}
+#chara-association {width: 20%;}
+.association {
+  .bg {
+    <% MstShinyColors::Chara.pluck(:id).each do |ch_id| %>
+    <%= "&.chibi%02d" % ch_id %> {
+      background-image: url('<%= '/img/coldbell/chara/%02d_chibi_mizugi2018.png' % ch_id %>');
+    }
+    <% end %>
+    <% MstShinyColors::Unit.pluck(:id).each do |un_id| %>
+    <%= "&.unit-%02d" % un_id %> {
+      background-image: url('<%= '/img/coldbell/unit/%02d_big.png' % un_id %>');
+    }
+    <% end %>
+    <% MstShinyColors::Chara.pluck(:attribute).map(&:downcase).uniq.each do |ch_attr| %>
+    <%= "&.type-%s" % ch_attr %> {
+      background-image: url('<%= '/img/coldbell/icon/attr_%s.png' % ch_attr %>');
+    }
+    <% end %>
+  }
+}
+
+.chara-cards {
+  & > .cbhrow {
+    & > .entry > a {
+      height: 32px;
+      & > .entry:nth-child(1) {
+        width: 32px;
+        height: inherit;
+      }
+      & > .entry:nth-child(2) {
+        width: calc(95% - 32px);
+      }
+    }
+  }
+}
+
+#chara-view-matrix {
+  .entry {
+    height:128px;
+  }
+}

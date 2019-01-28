@@ -1,5 +1,5 @@
-Rails.application.routes.draw do
-  scope format: false do
+ColdbellHeaven::Engine.routes.draw do
+  scope '/shinymas', format: false do
     get 'chara/:id', to: 'chara#view', constraints: {id:%r(\d+)}, as: 'chara'
     
     get 'chara/matrix', to: 'chara#view_matrix'

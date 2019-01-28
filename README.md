@@ -20,5 +20,20 @@ The database is generated with my own JSON-to-SQL that specialized for this app.
 use `rvmrc` or something to make a separate gemset for the project.
 
 ## Installation
-Just download. I don't think there are any extra steps required.
+Add this line to your application's Gemfile:
 
+```ruby
+gem 'coldbell_heaven'
+```
+
+And then execute:
+```bash
+$ bundle
+```
+
+Or install it yourself as:
+```bash
+$ gem install coldbell_heaven
+```
+
+**NOTE**: Remember that this is just for enginefied website.
