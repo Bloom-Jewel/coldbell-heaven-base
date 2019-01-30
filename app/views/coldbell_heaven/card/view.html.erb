@@ -1,14 +1,15 @@
 <%
+  open_graph('og:title', @title.to_str)
   open_graph('og:image', shinymasu_card_image_path('icon', @card.id)) rescue 0
-  open_graph('og:description', 'Card detail for %s-%s %s "%s"' % [
+  open_graph('og:description', ('Card detail for %s-%s %s "%s"' % [
     @card.type.to_s[0].upcase,
     (%w(C N R SR SSR).at(@card.rarity) || 'UNK'),
     @card.character.first_name_romaji,
     @card.title_tr
-  ])
+  ]).to_str)
 %>
 <div id="card-detail" class="card">
-  <div class="row" id="card-title">
+  <div class="cbhrow" id="card-title">
     <div class="entry">
       <h1><%= @card.title %></h1>
       <% if @card.title_tr? %>
@@ -20,14 +21,14 @@
       <h2><%= @card.character.name_romaji || '-' %></h2>
     </div>
   </div>
-  <div class="row" id="card-image-list">
+  <div class="cbhrow" id="card-image-list">
     <div class="entry bg" style="background-image:url(<%= shinymasu_card_image_path('full',@card.id) %>)"></div>
     <% if @card.produce? %>
     <div class="entry bg" style="background-image:url(<%= shinymasu_card_image_path('full2',@card.id) %>)"></div>
     <% end %>
   </div>
   <h2>Card Status</h2>
-  <div class="row" id="card-status">
+  <div class="cbhrow" id="card-status">
     <% if @card.produce? then %>
       <% %w(vocal dance visual mental).each do |stat| %>
       <div class="entry stat-<%= stat %>" data-field="<%= stat.capitalize %>"><span class="stat base"><%= @card.attributes[stat] %></span>/<span class="stat limit"><%= @card.attributes["limit_"+stat] %></span></div>
@@ -51,7 +52,7 @@
   </div>
   <%= render "card_details" %>
   <h2>Navigation</h2>
-  <div class="row" style="text-align:center;">
+  <div class="cbhrow" style="text-align:center;">
     <%= link_to('Character Page',chara_path(@card.character_id)) %> &nbsp;|&nbsp;
     <%= link_to('Character List',chara_matrix_path()) %>
   </div>

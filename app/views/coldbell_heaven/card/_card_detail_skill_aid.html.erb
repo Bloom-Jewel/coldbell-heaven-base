@@ -7,18 +7,18 @@
     rarity_text = 'data-rarity=%s'%[skill.level.pred]
   %>
   <div class="fit entry" <%= rarity_text %> >
-    <div class="row">
+    <div class="cbhrow">
       <div class="entry"><%= stage_text %></div>
       <div class="entry">
-        <div class="row"><%= skill.name %></div>
-        <div class="row"><%= skill.human_type %></div>
+        <div class="cbhrow"><%= skill.name %></div>
+        <div class="cbhrow"><%= skill.human_type %></div>
       </div>
       <div class="entry"><%= "-" %></div>
       <div class="entry"><%= "Card Level #{level_limit}" %></div>
       <div class="entry">
       <% if skill.contribute_fes_point? then %>
         <% skill.each_fes_order(3) do |fes_row| %>
-        <div class="row">
+        <div class="cbhrow">
           <% fes_row.each do |fes_key, fes_point| %>
           <div class="entry fes-<%= fes_key %>"><%= fes_point %></div>
           <% end %>
@@ -29,19 +29,19 @@
       <% end %>
       </div>
     </div>
-    <div class="row">
+    <div class="cbhrow">
     <% it_s = 0 %>
     <% skill.each_effect_iterable do |ef_name, ef_list| %>
       <% it_s += 1 %>
       <div class="entry card-skill-effect-list" data-caption="<%= ef_name.humanize %>">
       <% ef_list.each do |effect| %>
         <% if effect.type == :cond then %>
-        <div class="row">
+        <div class="cbhrow">
           <div class="entry"><%= effect[:name] %></div>
           <div class="entry"><%= effect[:value] %></div>
         </div>
         <% else %>
-        <div class="row">
+        <div class="cbhrow">
           <div class="entry"><%= effect[:name] %></div>
           <div class="entry"><%= effect[:duration] %></div>
           <div class="entry"><%= effect[:target] %></div>

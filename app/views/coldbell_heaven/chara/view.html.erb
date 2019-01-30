@@ -1,5 +1,6 @@
 <%
   base_face = shinymasu_card_image_path('icon', "102%03d0010" % @chara.id)
+  open_graph 'og:title', @title
   open_graph 'og:image', base_face
   open_graph 'og:image:secure_url', base_face
   open_graph 'og:description', "Character detail for %s" % [@chara.name_romaji]
@@ -8,42 +9,42 @@
   <h1><%= @chara.name %></h1>
   <div id="chara-portrait" class="bg portrait<%= "%02d" % @chara.id %>"></div>
   <div id="chara-data" class="card">
-    <div class="row">
+    <div class="cbhrow">
       <div class="entry" data-field="Kana"><%= @chara.name_kana %></div>
       <div class="entry" data-field="Romaji"><%=
         @chara.name_romaji ||
         'N/A'
       %></div>
     </div>
-    <div class="row">
+    <div class="cbhrow">
       <div class="entry" data-field="Birthdate"><%= @chara.birth_day.strftime('%B %d') %></div>
       <div class="entry" data-field="Blood">Type <%= @chara.blood_type %></div>
       <div class="entry" data-field="Town"><%= @chara.place %></div>
     </div>
-    <div class="row">
+    <div class="cbhrow">
       <div class="entry" data-field="Age"><%= pluralize(@chara.age,'years') %> old</div>
       <div class="entry" data-field="Cr. Age"><%= pluralize(@chara.actual_age,'years') %> old*</div>
       <div class="entry" data-field="Sign"><%= @chara.star_sign %></div>
     </div>
-    <div class="row">
+    <div class="cbhrow">
       <div class="entry" data-field="Height"><%= @chara.height %>cm</div>
       <div class="entry" data-field="Weight"><%= @chara.weight %>kg</div>
       <div class="entry" data-field="Threes"><%= @chara.attributes.values_at('bust','waist','hip').join('/') %></div>
     </div>
-    <div class="row">
+    <div class="cbhrow">
       <div class="entry" data-field="DomHand"><%= @chara.arm %></div>
       <div class="entry" data-field="Seiyuu"><%= @chara.character_voice || 'N/A' %></div>
     </div>
-    <div class="row">
+    <div class="cbhrow">
       <div class="entry" data-field="Hobby"><%= @chara.hobby || '-' %></div>
     </div>
-    <div class="row">
+    <div class="cbhrow">
       <div class="entry" data-field="Special"><%= @chara.specialty || '-' %></div>
     </div>
   </div>
   <div id="chara-association" class="association">
-    <div class="fit row bg unit-<%= '%02d' % @chara.unit_id %>"></div>
-    <div class="fit row bg type-<%= @chara.attr.downcase %>"></div>
+    <div class="fit cbhrow bg unit-<%= '%02d' % @chara.unit_id %>"></div>
+    <div class="fit cbhrow bg type-<%= @chara.attr.downcase %>"></div>
   </div>
 </div>
 <%

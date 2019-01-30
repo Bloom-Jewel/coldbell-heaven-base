@@ -1,7 +1,7 @@
 <%
   list_mode = @_card_details.size > 10 ? 'dual' : 'normal'
 %>
-<div class="row" id="card-detail-tabs">
+<div class="cbhrow" id="card-detail-tabs">
   <ul class="<%= list_mode %>">
   <% @_card_details.each do |short, long| %>
     <a href="#<%= short %>"><li data-key="<%= short %>"><%= long %></li></a>
@@ -9,7 +9,7 @@
   </ul>
 </div>
 <% @_card_details.each do |short, long| %>
-<div class="row card-detail-tab" id="<%= short %>">
+<div class="cbhrow card-detail-tab" id="<%= short %>">
   <%= render "card_detail_#{short}" %>
 </div>
 <% end %>
