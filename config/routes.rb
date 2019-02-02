@@ -1,4 +1,6 @@
-ColdbellHeaven::Engine.routes.draw do
+engine = Rails.application
+engine = ColdbellHeaven::Engine
+engine.routes do
   scope '/shinymas', format: false do
     get 'chara/:id', to: 'chara#view', constraints: {id:%r(\d+)}, as: 'chara'
     

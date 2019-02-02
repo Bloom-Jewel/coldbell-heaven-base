@@ -1,12 +1,17 @@
 module ColdbellHeaven
   class ApplicationController < Object::ApplicationController
     helper Engine.helpers
-    helper Engine.routes.url_helpers
     protect_from_forgery with: :exception
     
+    before_action do
+      helpers.class.instance_exec do
+        include Engine.routes.url_helpers
+      end
+    end
     after_action do
       response.body.gsub!(/>\s+</,'><')
-      
+      response.body.gsub!(/>\s+(\S)/,'>\1')
+      response.body.gsub!(/(\S)\s+</,'\1<')
     end
     
     private

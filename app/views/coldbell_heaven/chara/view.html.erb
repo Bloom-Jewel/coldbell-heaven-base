@@ -56,7 +56,7 @@
 <div id="chara-produce-cards" class="chara-cards">
   <h2>Produce Cards</h2>
   <% produce.each_slice( _divs ) do |cardrow| %>
-  <div class="row">
+  <div class="cbhrow">
     <% cardrow.each do |card| %>
     <div class="entry">
       <% if card.nil? %>
@@ -81,7 +81,7 @@
 <div id="chara-support-cards" class="chara-cards">
   <h2>Support Cards</h2>
   <% support.each_slice( _divs ) do |cardrow| %>
-  <div class="row">
+  <div class="cbhrow">
     <% cardrow.each do |card| %>
     <div class="entry">
       <% if card.nil? %>
