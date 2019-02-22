@@ -13,6 +13,7 @@ module ColdbellHeaven
           :supp => 'Supports',
         })
       end
+      @_card_details.store(:resources,'Resources')
       @title = 'ShinyColors - %s' % [@card.title_tr]
     end
     

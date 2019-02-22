@@ -1,0 +1,27 @@
+<%
+  resource_key = {
+    image_path: 'Card Image',
+    fes_image_path: 'Card Image (Costume)',
+    movie_path: 'Commu Movie',
+    fes_movie_path: 'Appeal Showndown',
+  }
+  resource_list = {}
+  resource_key.keys.each do |k|
+    path = @card.try(k)
+    next if path.blank?
+    resource_list[k] = path
+  end
+%>
+<% if resource_list.empty? %>
+<p>Resources not available</p>
+<% else %>
+  <p class="resource-copyright text-warning">These resources are owned and copyrighted by the respective owners, Bandai Namco Entertainment Inc.</p>
+  <p>If there are any problems with resource listing, contact me to remove it.</p>
+  <br></hr>
+  <% resource_list.each do |k,v| %>
+  <%= link_to(
+    "<p>#{resource_key[k]}</p>".html_safe,
+    asset_encode_path(v),
+  ) %>
+  <% end %>
+<% end %>

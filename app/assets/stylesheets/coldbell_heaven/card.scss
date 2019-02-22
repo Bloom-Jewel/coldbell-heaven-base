@@ -178,6 +178,16 @@
       &.exc_mst { background-image: linear-gradient(#ff9311,#ffff33); }
     }
   }
+  
+  &#resources {
+    & > p.resource-copyright {
+      font-size: 28pt;
+    }
+    p {
+      text-align: center;
+      font-size: 12pt;
+    }
+  }
 }
 
 .card-section {

@@ -19,6 +19,14 @@ module MstShinyColors
     def sprite_path(skin_id=nil)
       File.join(ASSET_IMAGE_PATH,'idols','costume_stand`',"3%02d%03d%03d%d.png" % [0,self.character_id,skin_id,0])
     end
+    def movie_path
+      return if rarity <= 3
+      File.join(ASSET_MOVIE_PATH,'idols','card',"%s.mp4") % [self.id2]
+    end
+    def fes_movie_path
+      return if rarity < 3
+      File.join(ASSET_MOVIE_PATH,'idols','card_costume',"%s.mp4") % [self.id2]
+    end
     def incomplete?
       super ||
       idol_memory_appeal_group_id.nil? ||

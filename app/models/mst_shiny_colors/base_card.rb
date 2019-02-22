@@ -1,7 +1,8 @@
 module MstShinyColors
   module BaseCard
     extend BaseMixedModel
-    ASSET_IMAGE_PATH = '/assets/images/content/'.freeze
+    ASSET_IMAGE_PATH = '/assets/images/content'.freeze
+    ASSET_MOVIE_PATH = '/assets/movies'.freeze
     
     def title
       @title ||= /【(.+)】/.match(self.name)[1]
